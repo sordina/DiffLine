@@ -1,0 +1,16 @@
+name:                DiffLine
+version:             0.1.0.0
+homepage:            http://github.com/sordina/DiffLine
+license:             MIT
+license-file:        LICENSE
+author:              Lyndon Maydwell
+maintainer:          maydwell@gmail.com
+category:            Text
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable diffline
+  main-is:             Main.hs
+  build-depends:       base -any, interpolatedstring-perl6 >= 0.9, split >= 0.2.2
+  hs-source-dirs:      src
+  default-language:    Haskell2010
