@@ -14,12 +14,14 @@ main :: IO ()
 main = getArgs >>= run
 
 run :: [String] -> IO ()
-run args | null args                                     = runFun onSlash
-         | any ((== args) . return) ["-s", "--slashes" ] = runFun onSlash
-         | any ((== args) . return) ["-r", "--repeats" ] = runFun onRepeat
-         | any ((== args) . return) ["-v", "--vertical"] = runFun onVertical
-         | any (`elem` args)        ["-h", "--help"    ] = help
-         | otherwise                                     = help
+run args | null args                              = runFun onSlash
+         | is          args  ["-s", "--slashes" ] = runFun onSlash
+         | is          args  ["-r", "--repeats" ] = runFun onRepeat
+         | is          args  ["-v", "--vertical"] = runFun onVertical
+         | any (`elem` args) ["-h", "--help"    ] = help
+         | otherwise                              = help
+  where
+  is as es = any (== as) (map return es)
 
 runFun :: ([String] -> [String]) -> IO ()
 runFun f = getContents >>= putStr . unlines . f . lines
